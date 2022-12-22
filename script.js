@@ -24,10 +24,29 @@ function playGame(cpuChoice, playerChoice){
     return "You win! " + playerChoice + " beats " + cpuChoice + ". Refresh the page to go again.";
 }
 
-let playerChoice = prompt("Type your choice of either 'rock', 'paper', or 'scissors'!").toLowerCase();
+function game (){
+    for(let i = 0; i < 5; i++){
+        let playerChoice = prompt("Type your choice of either 'rock', 'paper', or 'scissors'!").toLowerCase();
+        let result = '';
 
-if ((playerChoice === 'rock') || (playerChoice === 'paper') || (playerChoice === 'scissors')) {
-    console.log(playGame(getComputerChoice(), playerChoice));
-} else {
-    console.log("Invalid player choice! Refresh page and try again.")
+        result = playGame(getComputerChoice(), playerChoice);
+        console.log(result);
+        if (result.search("You win!") != -1){
+            playerWins++;
+        }
+        if (result.search("CPU wins") != -1){
+            cpuWins++;
+        }
+        if (result.search("a draw") != -1){
+            draw++;
+        }
+    }
+
+    return `The CPU won ${cpuWins} game(s), you won ${playerWins} game(s), and there were ${draw} draws.`
 }
+
+let playerWins = 0;
+let cpuWins = 0;
+let draw = 0;
+
+console.log(game())
